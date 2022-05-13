@@ -1,2 +1,2 @@
 # ambulantes-api
-About Alternative "ambulantes" api created by Team Cubos Academy.
+Alternative "ambulantes" api created by Team Cubos Academy.
