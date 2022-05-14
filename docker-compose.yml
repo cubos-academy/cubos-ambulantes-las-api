@@ -4,14 +4,14 @@ services:
   pgsql:
     image: postgres:alpine
     ports:
-      - '5432:5432'
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     container_name: 'pgsql'
     restart: always
     volumes:
       - pg-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: cubos_academy
-      POSTGRES_PASSWORD: best@academy@forever
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   adminer:
     image: adminer
