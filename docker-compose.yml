@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  pgsql:
+    image: postgres:alpine
+    ports:
+      - '5432:5432'
+    container_name: 'pgsql'
+    restart: always
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: cubos_academy
+      POSTGRES_PASSWORD: best@academy@forever
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  pg-data:
