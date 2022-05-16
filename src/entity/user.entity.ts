@@ -1,5 +1,14 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserAddress } from './user_address.entity';
+import { UserContacts } from './user_contacts.entity';
 
+@Entity({ name: 'users' })
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,4 +33,12 @@ export class UserEntity {
 
   @Column({ type: 'timestamp', nullable: false })
   created_at: Date;
+
+  @OneToOne((type) => UserAddress)
+  @JoinColumn()
+  address: UserAddress;
+
+  @OneToOne((type) => UserContacts)
+  @JoinColumn()
+  contacts: UserContacts;
 }
