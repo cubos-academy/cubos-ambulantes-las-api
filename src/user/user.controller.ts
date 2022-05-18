@@ -24,7 +24,6 @@ export class UserController {
 
   @Post()
   @userControllerSwaggerDecorators.post()
-  @UseGuards(AuthGuard())
   async create(@Body() createUserDto: CreateUserDto) {
     return this.userService
       .create(createUserDto)
