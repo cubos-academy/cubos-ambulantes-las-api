@@ -5,6 +5,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { QueryFailedError } from 'typeorm';
 import { throwDriverErrors } from 'src/utils/driver-errors.util';
 import { AuthGuard } from '@nestjs/passport';
+import { userContactsControllerDecorators } from './doc/user-contacts-controller.decorators';
 
 @ApiTags('user')
 @Controller('user/contacts')
@@ -12,6 +13,7 @@ export class UserContactsController {
   constructor(private readonly userContactsService: UserContactsService) {}
 
   @Get()
+  @userContactsControllerDecorators.get()
   @UseGuards(AuthGuard())
   async findOne(@Req() req) {
     const id: number = req.user.contactsId;
@@ -25,6 +27,7 @@ export class UserContactsController {
   }
 
   @Put()
+  @userContactsControllerDecorators.put()
   @UseGuards(AuthGuard())
   async update(
     @Req() req,

@@ -42,5 +42,5 @@ export class UpdateUserContactsDto {
   @IsOptional()
   @IsNumberString()
   @Length(8, 13)
-  mobile_phone: string;
+  mobilePhone: string;
 }
