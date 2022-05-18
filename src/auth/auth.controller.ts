@@ -1,18 +1,5 @@
-import {
-  Controller,
-  Post,
-  Body,
-  InternalServerErrorException,
-} from '@nestjs/common';
-import {
-  ApiCreatedResponse,
-  ApiInternalServerErrorResponse,
-  ApiNotFoundResponse,
-  ApiOperation,
-  ApiTags,
-  ApiUnauthorizedResponse,
-} from '@nestjs/swagger';
-import { credentialsSchemaExample } from 'src/auth/doc/credentials-example.schema';
+import { Controller, Post, Body } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { authControllerSwaggerDecorators } from './doc/auth-controller.decorators';
 import { CredentialsDto } from './dto/credentials.dto';
@@ -25,8 +12,6 @@ export class AuthController {
   @Post('/login')
   @authControllerSwaggerDecorators.post()
   async login(@Body() credentialsDto: CredentialsDto) {
-    return this.authService.signIn(credentialsDto).catch(() => {
-      throw new InternalServerErrorException();
-    });
+    return this.authService.signIn(credentialsDto);
   }
 }

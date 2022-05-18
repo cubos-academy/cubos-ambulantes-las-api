@@ -44,8 +44,8 @@ export class AuthService {
         type: 'Bearer',
         expiresIn: 18000,
       };
+    } else {
+      throw new UnauthorizedException('Incorrect password');
     }
-
-    throw new UnauthorizedException('Incorrect password');
   }
 }
