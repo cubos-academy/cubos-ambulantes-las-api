@@ -14,6 +14,7 @@ import {
 } from '@nestjs/swagger';
 import { credentialsSchemaExample } from 'src/auth/doc/credentials-example.schema';
 import { AuthService } from './auth.service';
+import { authControllerSwaggerDecorators } from './doc/auth-controller.decorators';
 import { CredentialsDto } from './dto/credentials.dto';
 
 @ApiTags('auth')
@@ -22,20 +23,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/login')
-  @ApiOperation({ summary: 'Authenticate user account' })
-  @ApiCreatedResponse({
-    description: 'Authenticated successfully',
-    schema: { example: credentialsSchemaExample },
-  })
-  @ApiInternalServerErrorResponse({
-    description: 'Internal server error',
-  })
-  @ApiNotFoundResponse({
-    description: 'User not found',
-  })
-  @ApiUnauthorizedResponse({
-    description: 'Email or password incorrect',
-  })
+  @authControllerSwaggerDecorators.post()
   async login(@Body() credentialsDto: CredentialsDto) {
     return this.authService.signIn(credentialsDto).catch(() => {
       throw new InternalServerErrorException();
