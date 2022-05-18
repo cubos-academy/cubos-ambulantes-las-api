@@ -5,8 +5,8 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { UserAddress } from './user_address.entity';
-import { UserContacts } from './user_contacts.entity';
+import { UserAddressEntity } from './user_address.entity';
+import { UserContactsEntity } from './user_contacts.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -14,7 +14,7 @@ export class UserEntity {
   id: number;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
-  full_name: string;
+  fullName: string;
 
   @Column({ type: 'varchar', length: 50, nullable: true })
   rg: string;
@@ -23,22 +23,22 @@ export class UserEntity {
   cpf: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  profile_picture_url: string;
+  profilePictureUrl: string;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
 
   @Column({ type: 'timestamp', nullable: true })
-  birth_date: Date;
+  birthDate: Date;
 
   @Column({ type: 'timestamp', nullable: false })
-  created_at: Date;
+  createdAt: Date;
 
-  @OneToOne((type) => UserAddress)
+  @OneToOne(() => UserAddressEntity)
   @JoinColumn()
-  address: UserAddress;
+  address: UserAddressEntity;
 
-  @OneToOne((type) => UserContacts)
+  @OneToOne(() => UserContactsEntity)
   @JoinColumn()
-  contacts: UserContacts;
+  contacts: UserContactsEntity;
 }

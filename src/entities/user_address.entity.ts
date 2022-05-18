@@ -1,9 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'user_address' })
-export class UserAddress {
+export class UserAddressEntity {
   @PrimaryGeneratedColumn()
-  user_id: number;
+  id: number;
 
   @Column({ type: 'varchar', length: 10, nullable: true })
   cep: string;
