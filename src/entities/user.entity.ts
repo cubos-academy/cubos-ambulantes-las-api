@@ -34,11 +34,21 @@ export class UserEntity {
   @Column({ type: 'timestamp', nullable: false })
   createdAt: Date;
 
-  @OneToOne(() => UserAddressEntity)
+  @OneToOne(() => UserAddressEntity, {
+    cascade: true,
+  })
   @JoinColumn()
   address: UserAddressEntity;
 
-  @OneToOne(() => UserContactsEntity)
+  @Column({ nullable: false })
+  addressId: number;
+
+  @OneToOne(() => UserContactsEntity, {
+    cascade: true,
+  })
   @JoinColumn()
   contacts: UserContactsEntity;
+
+  @Column({ nullable: false })
+  contactsId: number;
 }
