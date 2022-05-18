@@ -18,9 +18,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('las-api')
-    .setDescription(
-      'Api que deve ser integrada no aplicativo de licenciamento de ambulantes de salvador',
-    )
+    .setDescription('Salvador street vendor management system API')
     .setVersion('1.0.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
