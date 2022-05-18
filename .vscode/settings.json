@@ -1,5 +1,7 @@
 {
     "conventionalCommits.scopes": [
-        "general"
+        "general",
+        "auth",
+        "user"
     ]
 }
