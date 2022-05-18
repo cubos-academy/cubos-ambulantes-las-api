@@ -19,17 +19,17 @@ export class AuthService {
   ) {}
 
   async signIn(credentialsDto: CredentialsDto) {
-    const { cpf, password } = credentialsDto;
+    const { cpf, password: receivedPassword } = credentialsDto;
     const user = await this.userRepo.findOne({ cpf });
 
     if (!user) {
       throw new NotFoundException('Not found an user with this cpf');
     }
 
-    const hashedUserPassword = user.password;
+    const userPassword = user.password;
     const isPasswordCorrect = await PasswordHelper.compare(
-      password,
-      hashedUserPassword,
+      receivedPassword,
+      userPassword,
     );
 
     if (isPasswordCorrect) {
@@ -44,8 +44,8 @@ export class AuthService {
         type: 'Bearer',
         expiresIn: 18000,
       };
-    } else {
-      throw new UnauthorizedException('Incorrect password');
     }
+
+    throw new UnauthorizedException('Incorrect password');
   }
 }
