@@ -42,6 +42,7 @@ export class UserService {
     delete result.password;
     delete result.address.id;
     delete result.contacts.id;
+    delete result.email;
 
     return result;
   }
