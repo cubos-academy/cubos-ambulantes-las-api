@@ -3,6 +3,7 @@
         "general",
         "auth",
         "user",
-        "user-address"
+        "user-address",
+        "user-contacts"
     ]
 }
