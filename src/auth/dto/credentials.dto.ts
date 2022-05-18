@@ -14,8 +14,8 @@ export class CredentialsDto {
   cpf: string;
 
   @ApiProperty({
-    description: 'password of the user',
-    example: 'theLight7',
+    description: 'Password of the user',
+    example: 'theLight7@Near',
     maxLength: 255,
     type: String,
   })
