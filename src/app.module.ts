@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EnvironmentConfig } from './config/environment.config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { UserAddressModule } from './user-address/user-address.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
     TypeOrmModule.forRoot(new EnvironmentConfig().getTypeOrmConfig()),
     UserModule,
     AuthModule,
+    UserAddressModule,
   ],
   controllers: [],
   providers: [],

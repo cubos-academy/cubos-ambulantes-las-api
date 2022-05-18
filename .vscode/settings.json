@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "general",
         "auth",
-        "user"
+        "user",
+        "user-address"
     ]
 }
