@@ -5,6 +5,7 @@ import { EnvironmentConfig } from './config/environment.config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { UserAddressModule } from './user-address/user-address.module';
+import { UserContactsModule } from './user-contacts/user-contacts.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { UserAddressModule } from './user-address/user-address.module';
     UserModule,
     AuthModule,
     UserAddressModule,
+    UserContactsModule,
   ],
   controllers: [],
   providers: [],
