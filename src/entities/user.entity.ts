@@ -1,3 +1,4 @@
+import { CredentialsDto } from 'src/auth/dto/credentials.dto';
 import {
   Column,
   Entity,
