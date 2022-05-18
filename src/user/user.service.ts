@@ -21,15 +21,18 @@ export class UserService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<UserEntity> {
-    const address = new UserAddressEntity();
-    const createAddress = await this.addressRepo.save(address);
+    //Address (Relational)
+    const addressEntity = new UserAddressEntity();
+    const createAddress = await this.addressRepo.save(addressEntity);
     createUserDto.address = createAddress;
 
-    const contacts = new UserContactsEntity();
-    contacts.email = createUserDto.email;
-    const createContact = await this.contactsRepo.save(contacts);
+    //Contacts (Relational)
+    const contactsEntity = new UserContactsEntity();
+    contactsEntity.email = createUserDto.email;
+    const createContact = await this.contactsRepo.save(contactsEntity);
     createUserDto.contacts = createContact;
 
+    //User
     const hashedPassword = await PasswordHelper.hash(createUserDto.password);
     createUserDto.password = hashedPassword;
 
