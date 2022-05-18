@@ -3,28 +3,33 @@ import {
   Get,
   Post,
   Body,
-  Param,
   NotFoundException,
   Put,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiConflictResponse,
   ApiCreatedResponse,
+  ApiHeader,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import {
   newUserSchemaExample,
   userSchemaExample,
-} from 'src/swagger/schemas/user.schema';
+} from 'src/user/doc/user-example.schema';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { QueryFailedError } from 'typeorm';
 import { throwDriverErrors } from 'src/utils/driver-errors.util';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('user')
 @Controller('user')
@@ -45,6 +50,7 @@ export class UserController {
   @ApiInternalServerErrorResponse({
     description: 'Internal server error',
   })
+  @UseGuards(AuthGuard())
   async create(@Body() createUserDto: CreateUserDto) {
     return this.userService
       .create(createUserDto)
@@ -54,7 +60,7 @@ export class UserController {
       });
   }
 
-  @Get(':id')
+  @Get()
   @ApiOperation({ summary: 'Get user details' })
   @ApiOkResponse({
     description: 'User found',
@@ -69,7 +75,18 @@ export class UserController {
     status: 500,
     description: 'Internal server error',
   })
-  async findOne(@Param('id') id: number) {
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+  })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'Bearer Token',
+    required: true,
+  })
+  async findOne(@Req() req) {
+    const id: number = req.user.id;
     const result = await this.userService.find(id);
 
     if (!result) {
@@ -79,19 +96,30 @@ export class UserController {
     return result;
   }
 
-  @Put(':id')
+  @Put()
   @ApiOperation({ summary: 'Update user details' })
   @ApiOkResponse({
     description: 'Updated successfully',
     schema: { example: userSchemaExample },
   })
   @ApiConflictResponse({
-    description: 'CPF or Email already exists on other user',
+    description: 'CPF or Email already in use',
   })
   @ApiInternalServerErrorResponse({
     description: 'Internal server error',
   })
-  async update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized',
+  })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'Bearer Token',
+    required: true,
+  })
+  async update(@Req() req, @Body() updateUserDto: UpdateUserDto) {
+    const id = req.user.id;
     return this.userService
       .update(id, updateUserDto)
       .catch((err: QueryFailedError) => {

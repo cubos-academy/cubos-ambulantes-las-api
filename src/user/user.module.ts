@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { UserAddressEntity } from 'src/entities/user_address.entity';
 import { UserContactsEntity } from 'src/entities/user_contacts.entity';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { UserContactsEntity } from 'src/entities/user_contacts.entity';
       UserAddressEntity,
       UserContactsEntity,
     ]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
   controllers: [UserController],
   providers: [UserService],
