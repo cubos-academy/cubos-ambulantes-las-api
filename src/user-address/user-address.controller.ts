@@ -5,6 +5,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { QueryFailedError } from 'typeorm';
 import { throwDriverErrors } from 'src/utils/driver-errors.util';
+import { userAddressControllerDecorators } from './doc/user-address-controller.decorators';
 
 @ApiTags('user')
 @Controller('user/address')
@@ -12,13 +13,20 @@ export class UserAddressController {
   constructor(private readonly userAddressService: UserAddressService) {}
 
   @UseGuards(AuthGuard())
+  @userAddressControllerDecorators.get()
   @Get()
   async findAll(@Req() req) {
     const id: number = req.user.addressId;
-    return this.userAddressService.findOne(id);
+    return this.userAddressService
+      .findOne(id)
+      .catch((err: QueryFailedError) => {
+        const errorCode = err.driverError.code;
+        throwDriverErrors(errorCode);
+      });
   }
 
   @Put()
+  @userAddressControllerDecorators.put()
   @UseGuards(AuthGuard())
   async update(@Req() req, @Body() updateUserAddressDto: UpdateAddressDto) {
     const id: number = req.user.id;
