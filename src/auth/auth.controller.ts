@@ -12,7 +12,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { credentialsSchemaExample } from 'src/swagger/schemas/credentials.schema';
+import { credentialsSchemaExample } from 'src/auth/doc/credentials-example.schema';
 import { AuthService } from './auth.service';
 import { CredentialsDto } from './dto/credentials.dto';
 
