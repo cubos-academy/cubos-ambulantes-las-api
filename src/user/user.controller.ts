@@ -3,11 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
-  ConflictException,
-  InternalServerErrorException,
   NotFoundException,
   Put,
 } from '@nestjs/common';
@@ -16,7 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { QueryFailedError } from 'typeorm';
-import { driverErrorCodes } from 'src/driver/error.codes';
+import { throwDriverErrors } from 'src/utils/driver-errors.util';
 
 @ApiTags()
 @Controller('user')
@@ -28,11 +24,8 @@ export class UserController {
     return this.userService
       .create(createUserDto)
       .catch((err: QueryFailedError) => {
-        if (err.driverError.code === driverErrorCodes.CONFLICT_ERROR) {
-          throw new ConflictException('cpf or email already exists');
-        } else {
-          throw new InternalServerErrorException();
-        }
+        const errorCode = err.driverError.code;
+        throwDriverErrors(errorCode);
       });
   }
 
@@ -54,13 +47,8 @@ export class UserController {
     return this.userService
       .update(id, updateUserDto)
       .catch((err: QueryFailedError) => {
-        if (err.driverError.code === driverErrorCodes.CONFLICT_ERROR) {
-          throw new ConflictException(
-            'cpf or email already exists, check the fields and try again',
-          );
-        } else {
-          throw new InternalServerErrorException();
-        }
+        const errorCode = err.driverError.code;
+        throwDriverErrors(errorCode);
       });
   }
 }
