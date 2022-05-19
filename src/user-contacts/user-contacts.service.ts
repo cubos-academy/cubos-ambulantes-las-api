@@ -12,13 +12,7 @@ export class UserContactsService {
   ) {}
 
   async findOne(id: number): Promise<UserContactsEntity> {
-    const result = await this.contactsRepo.findOne(id);
-
-    if (!result) {
-      throw new NotFoundException();
-    }
-
-    return this.filterResults(result);
+    return this.contactsRepo.findOne(id);
   }
 
   async update(
@@ -29,9 +23,7 @@ export class UserContactsService {
 
     await this.contactsRepo.save(updateUserContactDto);
 
-    const result = await this.contactsRepo.findOne(id);
-
-    return this.filterResults(result);
+    return this.contactsRepo.findOne(id);
   }
 
   /**
@@ -39,7 +31,7 @@ export class UserContactsService {
    * @param entity user contacts entity
    * @returns the same entity but with no unnecessary columns
    */
-  private filterResults(entity: UserContactsEntity) {
+  filter(entity: UserContactsEntity) {
     if (entity) {
       delete entity.id;
     }
