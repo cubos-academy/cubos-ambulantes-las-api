@@ -19,6 +19,9 @@ export class UserAddressController {
     const id: number = req.user.addressId;
     return this.userAddressService
       .findOne(id)
+      .then((result) => {
+        return this.userAddressService.filter(result);
+      })
       .catch((err: QueryFailedError) => {
         const errorCode = err.driverError.code;
         throwDriverErrors(errorCode);
@@ -33,6 +36,9 @@ export class UserAddressController {
 
     return this.userAddressService
       .update(id, updateUserAddressDto)
+      .then((result) => {
+        return this.userAddressService.filter(result);
+      })
       .catch((err: QueryFailedError) => {
         const errorCode = err.driverError.code;
         throwDriverErrors(errorCode);
