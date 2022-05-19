@@ -7,6 +7,7 @@ import {
   Put,
   UseGuards,
   Req,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
@@ -16,6 +17,7 @@ import { QueryFailedError } from 'typeorm';
 import { throwDriverErrors } from 'src/utils/driver-errors.util';
 import { AuthGuard } from '@nestjs/passport';
 import { userControllerSwaggerDecorators } from './doc/user-controller.decorators';
+import { UserEntity } from 'src/entities/user.entity';
 
 @ApiTags('user')
 @Controller('user')
@@ -27,6 +29,9 @@ export class UserController {
   async create(@Body() createUserDto: CreateUserDto) {
     return this.userService
       .create(createUserDto)
+      .then((result) => {
+        return this.userService.filter(result);
+      })
       .catch((err: QueryFailedError) => {
         const errorCode = err.driverError.code;
         throwDriverErrors(errorCode);
@@ -38,24 +43,31 @@ export class UserController {
   @UseGuards(AuthGuard())
   async findOne(@Req() req) {
     const id: number = req.user.id;
-    const result = await this.userService.find(id);
 
-    if (!result) {
-      throw new NotFoundException('User not found');
-    }
-
-    return result;
+    return this.userService
+      .find(id)
+      .then((result) => {
+        return this.userService.filter(result);
+      })
+      .catch((err: QueryFailedError) => {
+        const errorCode = err.driverError.code;
+        throwDriverErrors(errorCode);
+      });
   }
 
   @Put()
   @UseGuards(AuthGuard())
   @userControllerSwaggerDecorators.put()
   async update(@Req() req, @Body() updateUserDto: UpdateUserDto) {
-    const id = req.user.id;
+    const id: number = req.user.id;
+
     return this.userService
       .update(id, updateUserDto)
+      .then((result) => {
+        return this.userService.filter(result);
+      })
       .catch((err: QueryFailedError) => {
-        const errorCode = err.driverError.code;
+        const errorCode = err?.driverError?.code;
         throwDriverErrors(errorCode);
       });
   }
