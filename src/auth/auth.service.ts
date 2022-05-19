@@ -14,13 +14,13 @@ import { CredentialsDto } from './dto/credentials.dto';
 export class AuthService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userRepo: Repository<UserEntity>,
+    private readonly userRepository: Repository<UserEntity>,
     private readonly jwtService: JwtService,
   ) {}
 
   async signIn(credentialsDto: CredentialsDto) {
     const { cpf, password: receivedPassword } = credentialsDto;
-    const user = await this.userRepo.findOne({ cpf });
+    const user = await this.userRepository.findOne({ cpf });
 
     if (!user) {
       throw new NotFoundException('Not found an user with this cpf');

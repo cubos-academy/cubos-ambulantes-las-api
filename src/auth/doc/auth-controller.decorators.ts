@@ -11,7 +11,11 @@ import { credentialsSchemaExample } from './credentials-example.schema';
 export const authControllerSwaggerDecorators = {
   post: () =>
     applyDecorators(
-      ApiOperation({ summary: 'Authenticate user account' }),
+      ApiOperation({
+        summary: 'Authenticate user account',
+        description:
+          'With this endpoint you can authenticated a user and get token access',
+      }),
       ApiCreatedResponse({
         description: 'Authenticated successfully',
         schema: { example: credentialsSchemaExample },

@@ -3,7 +3,7 @@ import { IsNumberString, IsString, Length } from 'class-validator';
 
 export class CredentialsDto {
   @ApiProperty({
-    description: 'CPF of the user',
+    description: 'CPF of an existing user',
     example: '13922947584',
     minLength: 11,
     maxLength: 11,
@@ -15,7 +15,7 @@ export class CredentialsDto {
 
   @ApiProperty({
     description: 'Password of the user',
-    example: 'theLight7@Near',
+    example: '@ivsonemidio',
     maxLength: 255,
     type: String,
   })
