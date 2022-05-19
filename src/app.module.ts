@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserAddressModule } from './user-address/user-address.module';
 import { UserContactsModule } from './user-contacts/user-contacts.module';
 import { EventsModule } from './events/events.module';
+import { AccreditationModule } from './accreditation/accreditation.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { EventsModule } from './events/events.module';
     UserAddressModule,
     UserContactsModule,
     EventsModule,
+    AccreditationModule,
   ],
   controllers: [],
   providers: [],

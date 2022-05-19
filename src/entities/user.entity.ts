@@ -4,9 +4,11 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AccreditationEntity } from './accreditation.entity';
 import { EventEntity } from './event-entity';
 import { UserAddressEntity } from './user_address.entity';
 import { UserContactsEntity } from './user_contacts.entity';
@@ -60,4 +62,7 @@ export class UserEntity {
   })
   @JoinTable()
   events: EventEntity[];
+
+  @OneToMany(() => AccreditationEntity, (accredidation) => accredidation.user)
+  accreditations: AccreditationEntity[];
 }

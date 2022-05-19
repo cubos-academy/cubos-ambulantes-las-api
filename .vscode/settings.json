@@ -5,6 +5,7 @@
         "user",
         "user-address",
         "user-contacts",
-        "events"
+        "events",
+        "accreditations"
     ]
 }
