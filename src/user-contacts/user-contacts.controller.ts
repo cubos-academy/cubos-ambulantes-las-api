@@ -20,6 +20,9 @@ export class UserContactsController {
 
     return this.userContactsService
       .findOne(id)
+      .then((result) => {
+        return this.userContactsService.filter(result);
+      })
       .catch((err: QueryFailedError) => {
         const errorCode = err.driverError.code;
         throwDriverErrors(errorCode);
@@ -37,6 +40,9 @@ export class UserContactsController {
 
     return this.userContactsService
       .update(id, updateUserContactDto)
+      .then((result) => {
+        return this.userContactsService.filter(result);
+      })
       .catch((err: QueryFailedError) => {
         const errorCode = err.driverError.code;
         throwDriverErrors(errorCode);
