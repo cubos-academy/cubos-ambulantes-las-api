@@ -35,5 +35,3 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # MISC
-.env
-ormconfig.json
