@@ -1,5 +1,6 @@
 import { applyDecorators } from '@nestjs/common';
 import {
+  ApiBadRequestResponse,
   ApiBearerAuth,
   ApiHeader,
   ApiInternalServerErrorResponse,
@@ -14,6 +15,8 @@ export const userAddressControllerDecorators = {
     applyDecorators(
       ApiOperation({
         summary: 'Get user address details',
+        description:
+          'With this endpoint you can get address details about the user',
       }),
       ApiOkResponse({
         description: 'User address found successfully',
@@ -37,6 +40,7 @@ export const userAddressControllerDecorators = {
     applyDecorators(
       ApiOperation({
         summary: 'Updates user address details',
+        description: 'With this endpoint you can update user address details',
       }),
       ApiOkResponse({
         description: 'User address updated successfully',
@@ -49,6 +53,9 @@ export const userAddressControllerDecorators = {
       }),
       ApiInternalServerErrorResponse({
         description: 'Internal server error',
+      }),
+      ApiBadRequestResponse({
+        description: 'Bad Request',
       }),
       ApiBearerAuth(),
       ApiHeader({

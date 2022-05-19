@@ -16,13 +16,7 @@ export class UserAddressService {
   ) {}
 
   async findOne(id: number): Promise<UserAddressEntity> {
-    const address = await this.addressRepo.findOne(id);
-
-    if (!address) {
-      throw new NotFoundException();
-    }
-
-    return this.filterResult(address);
+    return this.addressRepo.findOne(id);
   }
 
   async update(
@@ -30,20 +24,19 @@ export class UserAddressService {
     updateAddressDto: UpdateAddressDto,
   ): Promise<UserAddressEntity> {
     updateAddressDto.id = id;
-    const result = await this.addressRepo.save(updateAddressDto);
-
-    return this.filterResult(result);
+    return this.addressRepo.save(updateAddressDto);
   }
 
   /**
    * @description Filter results from methods and delete unecessary columns
-   * @param address Address Entity
+   * @param entity Address Entity
+   * @returns the same entity but with no unnecessary columns
    */
-  private filterResult(address: UserAddressEntity) {
-    if (address) {
-      delete address.id;
+  filter(entity: UserAddressEntity) {
+    if (entity) {
+      delete entity.id;
     }
 
-    return address;
+    return entity;
   }
 }
