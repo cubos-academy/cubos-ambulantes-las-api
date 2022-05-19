@@ -64,6 +64,17 @@ export class UpdateAddressDto {
 
   @ApiProperty({
     required: false,
+    description: 'City that user lives in',
+    example: 'Salvador',
+    maxLength: 80,
+    type: String,
+  })
+  @IsOptional()
+  @Length(1, 80)
+  city: string;
+
+  @ApiProperty({
+    required: false,
     description: 'Two initial letter of state that user lives in',
     example: 'BA',
     minLength: 2,

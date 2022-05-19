@@ -20,6 +20,9 @@ export class UserAddressEntity {
   @Column({ type: 'varchar', length: 80, nullable: true })
   district: string;
 
+  @Column({ type: 'varchar', length: 80, nullable: true })
+  city: string;
+
   @Column({ type: 'varchar', length: 2, nullable: true })
   state: string;
 }
