@@ -1,6 +1,6 @@
 export const userSchemaExample = {
   id: 1,
-  fullName: 'Quarto filho',
+  fullName: 'Fulano de tal',
   rg: '15554 SDS BA',
   cpf: '13938958588',
   profilePictureUrl:
@@ -16,7 +16,7 @@ export const userSchemaExample = {
     state: 'Salvador',
   },
   contacts: {
-    email: 'quarto@filho.com',
+    email: 'cicrano@boitata.com',
     phone: '40028922',
     mobilePhone: '81981143555',
   },
@@ -24,12 +24,12 @@ export const userSchemaExample = {
 
 export const newUserSchemaExample = {
   id: 4,
-  fullName: 'Ivson Emidio',
+  fullName: 'Danny Worsnop',
   cpf: '13938947485',
   rg: null,
   birthDate: null,
   contacts: {
-    email: 'bringme@thehorizon.com',
+    email: 'fulanodetal@boitata.com',
     phone: null,
     mobilePhone: null,
   },
