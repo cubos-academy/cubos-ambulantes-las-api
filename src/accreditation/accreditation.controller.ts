@@ -15,6 +15,7 @@ import { AdminTempHelper } from 'src/helpers/admin-authorization.helper';
 import { throwDriverErrors } from 'src/utils/driver-errors.util';
 import { QueryFailedError } from 'typeorm';
 import { AccreditationService } from './accreditation.service';
+import { accreditationDecorators } from './doc/accreditation-controller.decorators';
 
 @ApiTags('accreditation')
 @Controller('accreditation')
@@ -22,6 +23,7 @@ export class AccreditationController {
   constructor(private readonly accreditationService: AccreditationService) {}
 
   @UseGuards(AuthGuard())
+  @accreditationDecorators.create()
   @Post(':eventId')
   async create(@Req() req, @Param('eventId') eventId: number) {
     const userId: number = req.user.id;
@@ -43,6 +45,7 @@ export class AccreditationController {
   }
 
   @UseGuards(AuthGuard())
+  @accreditationDecorators.findAll()
   @Get()
   async findAll(@Req() req) {
     const userId: number = req.user.id;
@@ -50,8 +53,9 @@ export class AccreditationController {
   }
 
   @UseGuards(AuthGuard())
+  @accreditationDecorators.findByEvent()
   @Get('/check/:eventId')
-  async findOne(@Req() req, @Param('eventId') eventId: number) {
+  async findByEvent(@Req() req, @Param('eventId') eventId: number) {
     const userId: number = req.user.id;
     const result = await this.accreditationService.findByEvent(userId, eventId);
 

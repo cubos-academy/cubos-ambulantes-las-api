@@ -1,0 +1,67 @@
+export const accreditationSchemaExample = {
+  id: 1,
+  event: {
+    id: 1,
+    name: 'Carnaval em Salvador',
+    description: 'O melhor carnaval do mundo é por aqui.',
+    imageUrl: 'www.igmur.com/imgr22',
+    startDate: '2023-02-01T00:00:00.000Z',
+    endDate: '2023-04-01T00:00:00.000Z',
+    status: 3,
+  },
+  location: null,
+  salesType: null,
+  status: null,
+  accreditedAt: '2022-05-19T20:44:13.564Z',
+};
+
+export const accreditationsSchemaExample = [
+  {
+    id: 1,
+    location: null,
+    salesType: null,
+    status: null,
+    accreditedAt: '2022-05-19T20:01:38.359Z',
+    event: {
+      id: 2,
+      name: 'Carnaval em Recife',
+      description: 'O melhor carnaval do mundo é por aqui, e café é muito bom.',
+      imageUrl: 'www.igmur.com/imgr22',
+      startDate: '2023-02-01T00:00:00.000Z',
+      endDate: '2023-04-01T00:00:00.000Z',
+      status: 3,
+    },
+  },
+  {
+    id: 2,
+    location: null,
+    salesType: null,
+    status: null,
+    accreditedAt: '2022-05-19T20:34:37.900Z',
+    event: {
+      id: 3,
+      name: 'Carnaval em Narnia',
+      description: 'O melhor carnaval do mundo é por aqui, e café é muito bom.',
+      imageUrl: 'www.igmur.com/imgr22',
+      startDate: '2023-02-01T00:00:00.000Z',
+      endDate: '2023-04-01T00:00:00.000Z',
+      status: 3,
+    },
+  },
+  {
+    id: 3,
+    location: null,
+    salesType: null,
+    status: null,
+    accreditedAt: '2022-05-19T20:34:37.900Z',
+    event: {
+      id: 4,
+      name: 'Carnaval em Salvador',
+      description: 'O melhor carnaval do mundo é por aqui, e café é muito bom.',
+      imageUrl: 'www.igmur.com/imgr22',
+      startDate: '2023-02-01T00:00:00.000Z',
+      endDate: '2023-04-01T00:00:00.000Z',
+      status: 3,
+    },
+  },
+];
