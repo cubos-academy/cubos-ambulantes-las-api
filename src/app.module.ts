@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { UserAddressModule } from './user-address/user-address.module';
 import { UserContactsModule } from './user-contacts/user-contacts.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserContactsModule } from './user-contacts/user-contacts.module';
     AuthModule,
     UserAddressModule,
     UserContactsModule,
+    EventsModule,
   ],
   controllers: [],
   providers: [],

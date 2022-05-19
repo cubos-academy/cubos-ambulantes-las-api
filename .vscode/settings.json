@@ -4,6 +4,7 @@
         "auth",
         "user",
         "user-address",
-        "user-contacts"
+        "user-contacts",
+        "events"
     ]
 }

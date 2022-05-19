@@ -2,9 +2,12 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { EventEntity } from './event-entity';
 import { UserAddressEntity } from './user_address.entity';
 import { UserContactsEntity } from './user_contacts.entity';
 
@@ -51,4 +54,10 @@ export class UserEntity {
 
   @Column({ nullable: false })
   contactsId: number;
+
+  @ManyToMany(() => EventEntity, {
+    cascade: true,
+  })
+  @JoinTable()
+  events: EventEntity[];
 }
