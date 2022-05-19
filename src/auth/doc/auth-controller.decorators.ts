@@ -14,7 +14,7 @@ export const authControllerSwaggerDecorators = {
       ApiOperation({
         summary: 'Authenticate user account',
         description:
-          'With this endpoint you can authenticated a user and get token access',
+          'With this endpoint you can authenticate a user and get token access',
       }),
       ApiCreatedResponse({
         description: 'Authenticated successfully',
