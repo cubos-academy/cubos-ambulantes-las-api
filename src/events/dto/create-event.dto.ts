@@ -7,7 +7,7 @@ import {
   IsUrl,
   Length,
 } from 'class-validator';
-import { allowedStatus } from 'src/entities/event-entity';
+import { allowedStatus } from 'src/events/entities/event-entity';
 
 export class CreateEventDto {
   @IsString()

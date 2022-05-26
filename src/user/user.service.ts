@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PasswordHelper } from '../helpers/password-helper';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UserEntity } from '../entities/user.entity';
-import { UserAddressEntity } from 'src/entities/user_address.entity';
-import { UserContactsEntity } from 'src/entities/user_contacts.entity';
+import { UserEntity } from './entities/user.entity';
+import { UserAddressEntity } from '../user-address/entities/user_address.entity';
+import { UserContactsEntity } from '../user-contacts/entities/user_contacts.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()

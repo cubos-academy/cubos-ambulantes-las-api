@@ -8,10 +8,10 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { AccreditationEntity } from './accreditation.entity';
-import { EventEntity } from './event-entity';
-import { UserAddressEntity } from './user_address.entity';
-import { UserContactsEntity } from './user_contacts.entity';
+import { AccreditationEntity } from '../../accreditation/entities/accreditation.entity';
+import { EventEntity } from '../../events/entities/event-entity';
+import { UserAddressEntity } from '../../user-address/entities/user_address.entity';
+import { UserContactsEntity } from '../../user-contacts/entities/user_contacts.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {

@@ -1,9 +1,10 @@
 import { existsSync, writeFileSync } from 'fs';
 import { EnvironmentConfig } from './environment.config';
+
 /**
- * Call this function on main to generate an ORM config JSON file.
+ * @description generate an ormconfig.json on root of project whether not exists.
  */
-export default function generateOrmConfig() {
+export default function generateOrmConfig(): void {
   const isFileCreated = existsSync('ormconfig.json');
 
   if (!isFileCreated) {

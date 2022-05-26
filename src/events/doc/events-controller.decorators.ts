@@ -9,7 +9,7 @@ import {
   ApiParam,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { eventStatus } from 'src/entities/event-entity';
+import { eventStatus } from 'src/events/entities/event-entity';
 import {
   eventExampleSchema,
   eventsExampleSchema,

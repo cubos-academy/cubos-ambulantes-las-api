@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AccreditationEntity } from 'src/entities/accreditation.entity';
-import { EventEntity } from 'src/entities/event-entity';
-import { UserEntity } from 'src/entities/user.entity';
+import { AccreditationEntity } from 'src/accreditation/entities/accreditation.entity';
 import { Repository } from 'typeorm';
+import { EventEntity } from 'src/events/entities/event-entity';
+import { UserEntity } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class AccreditationService {
