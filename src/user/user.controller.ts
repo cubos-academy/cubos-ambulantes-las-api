@@ -3,11 +3,9 @@ import {
   Get,
   Post,
   Body,
-  NotFoundException,
   Put,
   UseGuards,
   Req,
-  InternalServerErrorException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';

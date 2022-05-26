@@ -2,7 +2,6 @@ import { applyDecorators } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
-  ApiHeader,
   ApiInternalServerErrorResponse,
   ApiOkResponse,
   ApiOperation,
@@ -29,11 +28,6 @@ export const userAddressControllerDecorators = {
       }),
       ApiInternalServerErrorResponse({ description: 'Internal server error' }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 
   put: () =>
@@ -58,10 +52,5 @@ export const userAddressControllerDecorators = {
         description: 'Bad Request',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 };

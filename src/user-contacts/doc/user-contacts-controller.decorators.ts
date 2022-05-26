@@ -3,7 +3,6 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiConflictResponse,
-  ApiHeader,
   ApiInternalServerErrorResponse,
   ApiOkResponse,
   ApiOperation,
@@ -30,11 +29,6 @@ export const userContactsControllerDecorators = {
         description: 'Internal server error',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 
   put: () =>
@@ -58,12 +52,6 @@ export const userContactsControllerDecorators = {
       }),
       ApiBadRequestResponse({
         description: 'Bad Request',
-      }),
-      ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
       }),
     ),
 };

@@ -4,7 +4,6 @@ import {
   ApiBearerAuth,
   ApiConflictResponse,
   ApiCreatedResponse,
-  ApiHeader,
   ApiInternalServerErrorResponse,
   ApiOkResponse,
   ApiOperation,
@@ -57,11 +56,6 @@ export const userControllerSwaggerDecorators = {
         description: 'Unauthorized',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 
   put: () =>
@@ -88,10 +82,5 @@ export const userControllerSwaggerDecorators = {
         description: 'Bad request',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 };

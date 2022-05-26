@@ -1,7 +1,6 @@
 import { applyDecorators } from '@nestjs/common';
 import {
   ApiBearerAuth,
-  ApiHeader,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -36,11 +35,6 @@ export const eventsControllerDecorators = {
         description: 'Internal server error',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 
   findOne: () =>
@@ -67,11 +61,6 @@ export const eventsControllerDecorators = {
         description: 'Internal server error',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 
   findByStatus: () =>
@@ -104,10 +93,5 @@ export const eventsControllerDecorators = {
         description: 'Internal server error',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 };
