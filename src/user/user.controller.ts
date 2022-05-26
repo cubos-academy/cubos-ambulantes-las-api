@@ -17,7 +17,6 @@ import { QueryFailedError } from 'typeorm';
 import { throwDriverErrors } from 'src/utils/driver-errors.util';
 import { AuthGuard } from '@nestjs/passport';
 import { userControllerSwaggerDecorators } from './doc/user-controller.decorators';
-import { UserEntity } from 'src/user/entities/user.entity';
 
 @ApiTags('user')
 @Controller('user')
