@@ -22,7 +22,7 @@ async function bootstrap() {
       'Salvador street vendor management system API, created by Backend Team from  Cubos Academy.',
     )
     .setExternalDoc(
-      'Github repository (⭐ ? ❤️ : 😭)',
+      'Github repository (⭐ ? 🥰 : 😭)',
       'https://github.com/IvsonEmidio/cubos-ambulantes-las-api',
     )
     .setVersion('1.0.1 Beta')
