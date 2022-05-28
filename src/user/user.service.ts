@@ -4,8 +4,6 @@ import { PasswordHelper } from '../helpers/password-helper';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserEntity } from './entities/user.entity';
-import { UserAddressEntity } from '../user-address/entities/user_address.entity';
-import { UserContactsEntity } from '../user-contacts/entities/user_contacts.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
@@ -13,48 +11,38 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-
-    @InjectRepository(UserAddressEntity)
-    private readonly addressRepository: Repository<UserAddressEntity>,
-
-    @InjectRepository(UserContactsEntity)
-    private readonly contactsRepository: Repository<UserContactsEntity>,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<UserEntity> {
-    //Address (Relational)
-    const addressEntity = new UserAddressEntity();
-    const createAddress = await this.addressRepository.save(addressEntity);
-    createUserDto.address = createAddress;
-
-    //Contacts (Relational)
-    const contactsEntity = new UserContactsEntity();
-    contactsEntity.email = createUserDto.email;
-    const createContact = await this.contactsRepository.save(contactsEntity);
-    createUserDto.contacts = createContact;
-
-    //User
     const hashedPassword = await PasswordHelper.hash(createUserDto.password);
     createUserDto.password = hashedPassword;
 
     createUserDto.createdAt = new Date();
 
-    const result = await this.userRepository.save(createUserDto);
+    const data = {
+      ...createUserDto,
+      contacts: {
+        email: createUserDto.email,
+      },
+      address: {},
+    };
+
+    const result = await this.userRepository.save(data);
     delete result.email;
 
     return result;
   }
 
-  async find(id: number): Promise<UserEntity> {
+  find(id: number): Promise<UserEntity> {
     return this.userRepository.findOne(
       { id },
       { relations: ['address', 'contacts'] },
     );
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<UserEntity> {
-    updateUserDto.id = id;
-    await this.userRepository.save(updateUserDto);
+  async update(id: number, data: UpdateUserDto): Promise<UserEntity> {
+    data.id = id;
+    await this.userRepository.save(data);
 
     return this.userRepository.findOne(id, {
       relations: ['address', 'contacts'],
