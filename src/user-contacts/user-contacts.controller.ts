@@ -13,7 +13,7 @@ export class UserContactsController {
   constructor(private readonly userContactsService: UserContactsService) {}
 
   @Get()
-  @userContactsControllerDecorators.get()
+  @userContactsControllerDecorators.findOne()
   @UseGuards(AuthGuard())
   async findOne(@Req() req) {
     const id: number = req.user.contactsId;
@@ -30,7 +30,7 @@ export class UserContactsController {
   }
 
   @Put()
-  @userContactsControllerDecorators.put()
+  @userContactsControllerDecorators.update()
   @UseGuards(AuthGuard())
   async update(
     @Req() req,

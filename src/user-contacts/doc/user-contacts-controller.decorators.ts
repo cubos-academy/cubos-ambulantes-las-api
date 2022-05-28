@@ -11,7 +11,7 @@ import {
 import { userContactsExampleSchema } from './user-contacts-exampe.schema';
 
 export const userContactsControllerDecorators = {
-  get: () =>
+  findOne: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Get user contacts',
@@ -31,7 +31,7 @@ export const userContactsControllerDecorators = {
       ApiBearerAuth(),
     ),
 
-  put: () =>
+  update: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Updates user contacts',
@@ -53,5 +53,6 @@ export const userContactsControllerDecorators = {
       ApiBadRequestResponse({
         description: 'Bad Request',
       }),
+      ApiBearerAuth(),
     ),
 };
