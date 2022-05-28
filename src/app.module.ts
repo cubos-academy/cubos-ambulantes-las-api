@@ -8,6 +8,7 @@ import { UserAddressModule } from './user-address/user-address.module';
 import { UserContactsModule } from './user-contacts/user-contacts.module';
 import { EventsModule } from './events/events.module';
 import { AccreditationModule } from './accreditation/accreditation.module';
+import { TokenModule } from './token/token.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AccreditationModule } from './accreditation/accreditation.module';
     UserContactsModule,
     EventsModule,
     AccreditationModule,
+    TokenModule,
   ],
   controllers: [],
   providers: [],
