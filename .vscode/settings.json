@@ -7,6 +7,7 @@
         "user-contacts",
         "events",
         "accreditations",
-        "token"
+        "token",
+        "user-password"
     ]
 }
