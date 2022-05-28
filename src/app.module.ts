@@ -6,15 +6,21 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { UserAddressModule } from './user-address/user-address.module';
 import { UserContactsModule } from './user-contacts/user-contacts.module';
-import { EventsModule } from './events/events.module';
 import { AccreditationModule } from './accreditation/accreditation.module';
-import { TokenModule } from './token/token.module';
 import { UserPasswordModule } from './user-password/user-password.module';
+import { EventsModule } from './events/events.module';
+import { TokenModule } from './token/token.module';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(new EnvironmentConfig().getTypeOrmConfig()),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
     UserModule,
     AuthModule,
     UserAddressModule,
@@ -25,6 +31,11 @@ import { UserPasswordModule } from './user-password/user-password.module';
     UserPasswordModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}
