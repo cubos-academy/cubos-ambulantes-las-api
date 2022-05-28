@@ -47,7 +47,7 @@ export class AccreditationController {
   @UseGuards(AuthGuard())
   @accreditationDecorators.findAll()
   @Get()
-  async findAll(@Req() req) {
+  findAll(@Req() req) {
     const userId: number = req.user.id;
     return this.accreditationService.findAll(userId);
   }
