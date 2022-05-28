@@ -18,8 +18,15 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('las-api')
-    .setDescription('Salvador street vendor management system API')
-    .setVersion('1.0.0')
+    .setDescription(
+      'Salvador street vendor management system API, created by Backend Team from  Cubos Academy.',
+    )
+    .setExternalDoc(
+      'Github repository (⭐ ? 🥰 : 😭)',
+      'https://github.com/IvsonEmidio/cubos-ambulantes-las-api',
+    )
+    .setVersion('1.0.1 Beta')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
