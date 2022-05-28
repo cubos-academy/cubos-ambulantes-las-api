@@ -5,6 +5,7 @@ import generateOrmConfig from './config/generate-ormconfig';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
+import * as csurf from 'csurf';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +17,7 @@ async function bootstrap() {
   );
 
   app.use(helmet());
+  app.use(csurf());
   app.enableCors();
 
   generateOrmConfig();
