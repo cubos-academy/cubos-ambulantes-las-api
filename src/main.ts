@@ -29,11 +29,13 @@ async function bootstrap() {
       'Github repository (⭐ ? 🥰 : 😭)',
       'https://github.com/IvsonEmidio/cubos-ambulantes-las-api',
     )
-    .setVersion('1.0.1 Beta')
+    .setVersion(process.env.API_VERSION)
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, {
+    customSiteTitle: `LAS - API - ${process.env.API_VERSION}`,
+  });
 
   await app.listen(3000);
 }

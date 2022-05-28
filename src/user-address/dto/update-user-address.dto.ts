@@ -33,8 +33,8 @@ export class UpdateAddressDto {
   @ApiProperty({
     required: false,
     description: `Number of user house's`,
-    example: 228,
-    type: Number,
+    example: '228',
+    type: String,
   })
   @IsOptional()
   @IsNumberString()

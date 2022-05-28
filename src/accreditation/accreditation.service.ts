@@ -21,15 +21,15 @@ export class AccreditationService {
   async create(userId: number, eventId: number): Promise<AccreditationEntity> {
     const event = await this.eventRepo.findOne(eventId);
     if (event) {
-      const user = new UserEntity();
-      user.id = userId;
+      const data = {
+        ...new AccreditationEntity(),
+        user: {
+          id: userId,
+        },
+        event,
+      };
 
-      const newAccreditation = new AccreditationEntity();
-
-      newAccreditation.user = user;
-      newAccreditation.event = event;
-
-      const result = await this.accreditationRepo.save(newAccreditation, {
+      const result = await this.accreditationRepo.save(data, {
         reload: true,
       });
       delete result.user;
@@ -46,23 +46,23 @@ export class AccreditationService {
     return result.accreditations;
   }
 
-  async findByEvent(
-    userId: number,
-    eventId: number,
-  ): Promise<AccreditationEntity[]> {
-    const user = new UserEntity();
-    user.id = userId;
-
-    const event = new EventEntity();
-    event.id = eventId;
+  findByEvent(userId: number, eventId: number): Promise<AccreditationEntity[]> {
+    const searchData = {
+      event: {
+        id: eventId,
+      },
+      user: {
+        id: userId,
+      },
+    };
 
     return this.accreditationRepo.find({
-      where: { user, event },
+      where: searchData,
       relations: ['event'],
     });
   }
 
-  async remove(id: number) {
+  remove(id: number) {
     return this.accreditationRepo.delete({ id });
   }
 }

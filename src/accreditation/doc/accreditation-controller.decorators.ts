@@ -63,11 +63,11 @@ export const accreditationDecorators = {
       ApiOperation({
         summary: 'Check whether user has accredited on specific event',
         description:
-          'With this endpoint you can check if a user has already accredited on specific event',
+          'With this endpoint you can check if a user has already accredited on specific event, whether a user are accredited, the event will be returned',
       }),
       ApiOkResponse({
         description: 'user already accredited on this event',
-        schema: { example: accreditationsSchemaExample },
+        schema: { example: [accreditationsSchemaExample[0]] },
       }),
       ApiNotFoundResponse({
         description: 'User has no accredited events with given ID',

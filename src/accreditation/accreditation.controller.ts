@@ -47,14 +47,14 @@ export class AccreditationController {
   @UseGuards(AuthGuard())
   @accreditationDecorators.findAll()
   @Get()
-  async findAll(@Req() req) {
+  findAll(@Req() req) {
     const userId: number = req.user.id;
     return this.accreditationService.findAll(userId);
   }
 
   @UseGuards(AuthGuard())
   @accreditationDecorators.findByEvent()
-  @Get('/check/:eventId')
+  @Get('/:eventId/check')
   async findByEvent(@Req() req, @Param('eventId') eventId: number) {
     const userId: number = req.user.id;
     const result = await this.accreditationService.findByEvent(userId, eventId);
