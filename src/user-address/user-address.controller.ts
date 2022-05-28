@@ -15,8 +15,9 @@ export class UserAddressController {
   @UseGuards(AuthGuard())
   @userAddressControllerDecorators.get()
   @Get()
-  async findAll(@Req() req) {
+  async findOne(@Req() req) {
     const id: number = req.user.addressId;
+
     return this.userAddressService
       .findOne(id)
       .then((result) => {
@@ -32,7 +33,7 @@ export class UserAddressController {
   @userAddressControllerDecorators.put()
   @UseGuards(AuthGuard())
   async update(@Req() req, @Body() updateUserAddressDto: UpdateAddressDto) {
-    const id: number = req.user.id;
+    const id: number = req.user.addressId;
 
     return this.userAddressService
       .update(id, updateUserAddressDto)
