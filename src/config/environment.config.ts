@@ -61,7 +61,7 @@ export class EnvironmentConfig {
         entitiesDir: 'src/entities',
         migrationsDir: 'src/migrations',
       },
-      ssl: this.isOnProduction(),
+      ssl: { rejectUnauthorized: false },
     };
   }
 }

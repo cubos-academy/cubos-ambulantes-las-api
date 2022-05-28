@@ -37,6 +37,6 @@ async function bootstrap() {
     customSiteTitle: `LAS - API - ${process.env.API_VERSION}`,
   });
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
