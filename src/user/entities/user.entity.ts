@@ -1,4 +1,3 @@
-import { Exclude } from 'class-transformer';
 import {
   Column,
   Entity,
@@ -66,7 +65,4 @@ export class UserEntity {
 
   @OneToMany(() => AccreditationEntity, (accredidation) => accredidation.user)
   accreditations: AccreditationEntity[];
-
-  @Exclude()
-  refresh_token?: string;
 }
