@@ -29,9 +29,14 @@ export class EnvironmentConfig {
   /**
    * @description determine whether the application is on production
    */
-  public isOnProduction(): boolean {
+  public isOnProduction(): boolean | object {
     const mode = this.getValue('NODE_ENV', false);
-    return mode != 'dev';
+
+    if (mode === 'dev') {
+      return false;
+    } else {
+      return { rejectUnauthorized: false };
+    }
   }
 
   /**
@@ -61,7 +66,7 @@ export class EnvironmentConfig {
         entitiesDir: 'src/entities',
         migrationsDir: 'src/migrations',
       },
-      ssl: { rejectUnauthorized: false },
+      ssl: this.isOnProduction(),
     };
   }
 }
