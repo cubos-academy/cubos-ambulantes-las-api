@@ -10,7 +10,7 @@ import {
 import { userAddressExampleSchema } from './user-address-example.schema';
 
 export const userAddressControllerDecorators = {
-  get: () =>
+  findOne: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Get user address details',
@@ -30,7 +30,7 @@ export const userAddressControllerDecorators = {
       ApiBearerAuth(),
     ),
 
-  put: () =>
+  update: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Updates user address details',
