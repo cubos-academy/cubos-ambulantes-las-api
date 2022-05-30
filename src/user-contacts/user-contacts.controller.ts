@@ -1,4 +1,4 @@
-import { Controller, Get, Body, Req, Put, UseGuards } from '@nestjs/common';
+import { Controller, Get, Body, Req, UseGuards, Patch } from '@nestjs/common';
 import { UserContactsService } from './user-contacts.service';
 import { UpdateUserContactsDto } from './dto/update-user-contact.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -29,7 +29,7 @@ export class UserContactsController {
       });
   }
 
-  @Put()
+  @Patch()
   @userContactsControllerDecorators.update()
   @UseGuards(AuthGuard())
   async update(
