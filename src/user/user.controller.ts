@@ -3,9 +3,9 @@ import {
   Get,
   Post,
   Body,
-  Put,
   UseGuards,
   Req,
+  Patch,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
@@ -52,7 +52,7 @@ export class UserController {
       });
   }
 
-  @Put()
+  @Patch()
   @UseGuards(AuthGuard())
   @userControllerSwaggerDecorators.update()
   async update(@Req() req, @Body() updateUserDto: UpdateUserDto) {
