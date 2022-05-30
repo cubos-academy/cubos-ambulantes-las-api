@@ -12,7 +12,7 @@ import {
 import { newUserSchemaExample, userSchemaExample } from './user-example.schema';
 
 export const userControllerSwaggerDecorators = {
-  post: () =>
+  create: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Creates a new user',
@@ -35,7 +35,7 @@ export const userControllerSwaggerDecorators = {
       }),
     ),
 
-  get: () =>
+  findOne: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Get user details',
@@ -58,7 +58,7 @@ export const userControllerSwaggerDecorators = {
       ApiBearerAuth(),
     ),
 
-  put: () =>
+  update: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Update user details',

@@ -22,7 +22,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @userControllerSwaggerDecorators.post()
+  @userControllerSwaggerDecorators.create()
   async create(@Body() createUserDto: CreateUserDto) {
     return this.userService
       .create(createUserDto)
@@ -36,7 +36,7 @@ export class UserController {
   }
 
   @Get()
-  @userControllerSwaggerDecorators.get()
+  @userControllerSwaggerDecorators.findOne()
   @UseGuards(AuthGuard())
   async findOne(@Req() req) {
     const id: number = req.user.id;
@@ -54,7 +54,7 @@ export class UserController {
 
   @Put()
   @UseGuards(AuthGuard())
-  @userControllerSwaggerDecorators.put()
+  @userControllerSwaggerDecorators.update()
   async update(@Req() req, @Body() updateUserDto: UpdateUserDto) {
     const id: number = req.user.id;
 
