@@ -65,4 +65,21 @@ export class UserEntity {
 
   @OneToMany(() => AccreditationEntity, (accredidation) => accredidation.user)
   accreditations: AccreditationEntity[];
+
+  constructor(user?: Partial<UserEntity>) {
+    this.id = user?.id;
+    this.fullName = user?.fullName;
+    this.rg = user?.rg;
+    this.cpf = user?.cpf;
+    this.profilePictureUrl = user?.profilePictureUrl;
+    this.password = user?.password;
+    this.birthDate = user?.birthDate;
+    this.createdAt = user?.createdAt;
+    this.address = user?.address;
+    this.addressId = user?.addressId;
+    this.contacts = user?.contacts;
+    this.contactsId = user?.contactsId;
+    this.events = user?.events;
+    this.accreditations = user?.accreditations;
+  }
 }
