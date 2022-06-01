@@ -3,7 +3,7 @@ import { UserContactsService } from './user-contacts.service';
 import { UpdateUserContactsDto } from './dto/update-user-contact.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { QueryFailedError } from 'typeorm';
-import { throwDriverErrors } from 'src/utils/driver-errors.util';
+import { throwDriverErrors } from '../utils/driver-errors.util';
 import { AuthGuard } from '@nestjs/passport';
 import { userContactsControllerDecorators } from './doc/user-contacts-controller.decorators';
 
