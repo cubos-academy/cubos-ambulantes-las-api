@@ -4,7 +4,7 @@ import { UpdateAddressDto } from './dto/update-user-address.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { QueryFailedError } from 'typeorm';
-import { throwDriverErrors } from 'src/utils/driver-errors.util';
+import { throwDriverErrors } from '../utils/driver-errors.util';
 import { userAddressControllerDecorators } from './doc/user-address-controller.decorators';
 
 @ApiTags('user')
