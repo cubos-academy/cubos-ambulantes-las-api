@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PasswordHelper } from 'src/helpers/password-helper';
-import { UserEntity } from 'src/user/entities/user.entity';
+import { PasswordHelper } from '../helpers/password-helper';
+import { UserEntity } from '../user/entities/user.entity';
 import { Repository } from 'typeorm';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 
