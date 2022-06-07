@@ -5,10 +5,10 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../user/entities/user.entity';
-import { PasswordHelper } from 'src/helpers/password-helper';
+import { PasswordHelper } from '../helpers/password-helper';
 import { Repository } from 'typeorm';
 import { CredentialsDto } from './dto/credentials.dto';
-import { TokenService } from 'src/token/token.service';
+import { TokenService } from '../token/token.service';
 
 @Injectable()
 export class AuthService {
