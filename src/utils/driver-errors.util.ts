@@ -7,7 +7,7 @@ enum driverErrorCodes {
   CONFLICT_ERROR = '23505',
 }
 
-export const throwDriverErrors = (code: string) => {
+export function throwDriverErrors(code: string) {
   if (code === driverErrorCodes.CONFLICT_ERROR) {
     throw new ConflictException(
       'Entered values already exists, please, check the fields and try again.',
@@ -15,4 +15,4 @@ export const throwDriverErrors = (code: string) => {
   } else {
     throw new InternalServerErrorException();
   }
-};
+}
