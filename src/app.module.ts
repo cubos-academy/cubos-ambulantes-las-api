@@ -12,6 +12,7 @@ import { EventsModule } from './events/events.module';
 import { TokenModule } from './token/token.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { SalesTypesModule } from './sales-types/sales-types.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { APP_GUARD } from '@nestjs/core';
     AccreditationModule,
     TokenModule,
     UserPasswordModule,
+    SalesTypesModule,
   ],
   controllers: [],
   providers: [
