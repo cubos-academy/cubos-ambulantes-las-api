@@ -8,6 +8,7 @@
         "events",
         "accreditations",
         "token",
-        "user-password"
+        "user-password",
+        "sales-types"
     ]
 }

@@ -58,7 +58,7 @@ export class EnvironmentConfig {
       username: this.getValue('POSTGRES_USER'),
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
-      synchronize: true,
+      synchronize: false,
       migrationsTableName: 'migrations',
       migrations: ['dist/migrations/*.{ts,js}'],
       entities: ['dist/**/*entity.{ts,js}'],
