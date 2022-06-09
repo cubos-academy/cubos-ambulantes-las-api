@@ -11,7 +11,7 @@ export class SalesTypeEntity {
   @Column({ type: 'text', unique: false, nullable: true })
   description: string;
 
-  constructor(salesType?: SalesTypeEntity) {
+  constructor(salesType?: Partial<SalesTypeEntity>) {
     this.id = salesType?.id;
     this.name = salesType?.name;
     this.description = salesType?.description;
