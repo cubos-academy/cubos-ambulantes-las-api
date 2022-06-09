@@ -12,7 +12,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { QueryFailedError } from 'typeorm';
-import { throwDriverErrors } from '../utils/driver-errors.util';
+import { throwDriverErrors } from '../utils/driver-errors/driver-errors.util';
 import { AuthGuard } from '@nestjs/passport';
 import { userControllerSwaggerDecorators } from './doc/user-controller.decorators';
 

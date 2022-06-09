@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EventEntity } from '../events/entities/event-entity';
 import { Repository } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.dto';
+import { SalesTypeEntity } from 'src/sales-types/entities/sales-type.entity';
 import { UpdateEventDto } from './dto/update-event.dto';
 
 @Injectable()
@@ -11,29 +12,67 @@ export class EventsService {
     @InjectRepository(EventEntity)
     private readonly eventRepository: Repository<EventEntity>,
   ) {}
-  async create(createEventDto: CreateEventDto): Promise<EventEntity> {
-    return this.eventRepository.save(createEventDto);
+
+  create(createEventDto: CreateEventDto): Promise<EventEntity> {
+    const allowedSalesTypes = this.idsToSalesTypesEntities(
+      createEventDto.allowedSalesTypes,
+    );
+
+    const eventData = {
+      ...createEventDto,
+      allowedSalesTypes,
+    };
+
+    return this.eventRepository.save(eventData);
   }
 
-  async findAll(): Promise<EventEntity[]> {
-    return this.eventRepository.find();
+  findAll(): Promise<EventEntity[]> {
+    return this.eventRepository.find({ relations: ['allowedSalesTypes'] });
   }
 
-  async findOne(id: number): Promise<EventEntity> {
-    return this.eventRepository.findOne(id);
+  findOne(id: number): Promise<EventEntity> {
+    return this.eventRepository.findOne(id, {
+      relations: ['allowedSalesTypes'],
+    });
   }
 
-  async findByStatus(status: number): Promise<EventEntity[]> {
-    return this.eventRepository.find({ status });
+  findByStatus(status: number): Promise<EventEntity[]> {
+    return this.eventRepository.find({
+      where: { status },
+      relations: ['allowedSalesTypes'],
+    });
   }
 
   async update(id: number, updateEventDto: UpdateEventDto) {
-    updateEventDto.id = id;
-    delete updateEventDto.adminKey;
-    return this.eventRepository.save(updateEventDto);
+    let allowedSalesTypes: SalesTypeEntity[];
+
+    if (updateEventDto.allowedSalesTypes) {
+      allowedSalesTypes = this.idsToSalesTypesEntities(
+        updateEventDto.allowedSalesTypes,
+      );
+    }
+
+    const updatedEventData = {
+      id,
+      ...updateEventDto,
+      allowedSalesTypes,
+    };
+
+    return this.eventRepository.save(updatedEventData);
   }
 
   remove(id: number) {
     this.eventRepository.delete({ id });
+  }
+
+  /**
+   * @description generate sales types entities from array of ids
+   */
+  private idsToSalesTypesEntities(
+    salesTypes: Array<number>,
+  ): Array<SalesTypeEntity> {
+    return salesTypes.map((id: number) => {
+      return new SalesTypeEntity({ id });
+    });
   }
 }
