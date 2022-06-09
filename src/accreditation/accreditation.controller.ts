@@ -28,20 +28,12 @@ export class AccreditationController {
   async create(@Req() req, @Param('eventId') eventId: number) {
     const userId: number = req.user.id;
 
-    const result = await this.accreditationService
+    return this.accreditationService
       .create(userId, eventId)
       .catch((err: QueryFailedError) => {
         const errorCode = err.driverError.code;
         throwDriverErrors(errorCode);
       });
-
-    if (!result) {
-      throw new NotFoundException(
-        'Not exists an event with this id, check the fields and try again',
-      );
-    }
-
-    return result;
   }
 
   @UseGuards(AuthGuard())

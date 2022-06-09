@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AccreditationEntity } from 'src/accreditation/entities/accreditation.entity';
 import { Repository } from 'typeorm';
@@ -35,6 +35,10 @@ export class AccreditationService {
       delete result.user;
 
       return result;
+    } else {
+      throw new NotFoundException(
+        'Not exists an event with this id, check the fields and try again',
+      );
     }
   }
 
