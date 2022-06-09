@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsDateString,
   IsIn,
   IsNumberString,
@@ -36,4 +37,7 @@ export class CreateEventDto {
   @Length(1, 255)
   @IsString()
   adminKey: string;
+
+  @IsArray()
+  allowedSalesTypes: Array<number>;
 }
