@@ -13,7 +13,7 @@ import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { QueryFailedError } from 'typeorm';
-import { throwDriverErrors } from 'src/utils/driver-errors.util';
+import { throwDriverErrors } from 'src/utils/driver-errors/driver-errors.util';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminTempHelper } from 'src/helpers/admin-authorization.helper';
 import { ApiExcludeEndpoint, ApiTags } from '@nestjs/swagger';
@@ -35,11 +35,12 @@ export class EventsController {
   @eventsControllerDecorators.findOne()
   @UseGuards(AuthGuard())
   async findOne(@Param('id') id: number) {
-    const result = await this.eventsService.findOne(id);
+    const eventItem = await this.eventsService.findOne(id);
 
-    if (result) {
-      return result;
+    if (eventItem) {
+      return eventItem;
     }
+
     throw new NotFoundException();
   }
 
@@ -54,8 +55,8 @@ export class EventsController {
   @ApiExcludeEndpoint()
   @Post()
   async create(@Body() createEventDto: CreateEventDto) {
-    const receivedAdmKey = createEventDto.adminKey;
-    AdminTempHelper.adminOrThrown(receivedAdmKey);
+    const adminKey = createEventDto.adminKey;
+    AdminTempHelper.adminOrThrown(adminKey);
     delete createEventDto.adminKey;
 
     return this.eventsService
@@ -73,8 +74,9 @@ export class EventsController {
     @Param('id') id: number,
     @Body() updateEventDto: UpdateEventDto,
   ) {
-    const receivedAdmKey = updateEventDto.adminKey;
-    AdminTempHelper.adminOrThrown(receivedAdmKey);
+    const adminKey = updateEventDto.adminKey;
+    AdminTempHelper.adminOrThrown(adminKey);
+    delete updateEventDto.adminKey;
 
     const isItemExisting = await this.eventsService.findOne(id);
 
