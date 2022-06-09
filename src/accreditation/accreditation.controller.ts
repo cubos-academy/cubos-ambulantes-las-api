@@ -17,8 +17,8 @@ import { QueryFailedError } from 'typeorm';
 import { AccreditationService } from './accreditation.service';
 import { accreditationDecorators } from './doc/accreditation-controller.decorators';
 
-@ApiTags('accreditation')
-@Controller('accreditation')
+@ApiTags('accreditations')
+@Controller('accreditations')
 export class AccreditationController {
   constructor(private readonly accreditationService: AccreditationService) {}
 
