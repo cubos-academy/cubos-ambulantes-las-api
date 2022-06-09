@@ -12,7 +12,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { ApiExcludeEndpoint, ApiTags } from '@nestjs/swagger';
 import { AdminTempHelper } from 'src/helpers/admin-authorization.helper';
-import { throwDriverErrors } from 'src/utils/driver-errors.util';
+import { throwDriverErrors } from 'src/utils/driver-errors/driver-errors.util';
 import { QueryFailedError } from 'typeorm';
 import { AccreditationService } from './accreditation.service';
 import { accreditationDecorators } from './doc/accreditation-controller.decorators';

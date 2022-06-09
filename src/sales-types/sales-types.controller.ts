@@ -14,7 +14,7 @@ import { ApiExcludeEndpoint, ApiTags } from '@nestjs/swagger';
 import { AdminTempHelper } from '../helpers/admin-authorization.helper';
 import { AuthGuard } from '@nestjs/passport';
 import { QueryFailedError } from 'typeorm';
-import { throwDriverErrors } from '../utils/driver-errors.util';
+import { throwDriverErrors } from '../utils/driver-errors/driver-errors.util';
 import { salesTypesDecorators } from './doc/sales-types-controller.decorators';
 
 @ApiTags('/sales')
