@@ -3,7 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EventEntity } from '../events/entities/event-entity';
 import { Repository } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.dto';
-import { SalesTypeEntity } from 'src/sales-types/entities/sales-type.entity';
+import {
+  idsToSalesTypesEntities,
+  SalesTypeEntity,
+} from 'src/sales-types/entities/sales-type.entity';
 import { UpdateEventDto } from './dto/update-event.dto';
 
 @Injectable()
@@ -14,7 +17,7 @@ export class EventsService {
   ) {}
 
   create(createEventDto: CreateEventDto): Promise<EventEntity> {
-    const allowedSalesTypes = this.idsToSalesTypesEntities(
+    const allowedSalesTypes = idsToSalesTypesEntities(
       createEventDto.allowedSalesTypes,
     );
 
@@ -47,7 +50,7 @@ export class EventsService {
     let allowedSalesTypes: SalesTypeEntity[];
 
     if (updateEventDto.allowedSalesTypes) {
-      allowedSalesTypes = this.idsToSalesTypesEntities(
+      allowedSalesTypes = idsToSalesTypesEntities(
         updateEventDto.allowedSalesTypes,
       );
     }
@@ -63,16 +66,5 @@ export class EventsService {
 
   remove(id: number) {
     this.eventRepository.delete({ id });
-  }
-
-  /**
-   * @description generate sales types entities from array of ids
-   */
-  private idsToSalesTypesEntities(
-    salesTypes: Array<number>,
-  ): Array<SalesTypeEntity> {
-    return salesTypes.map((id: number) => {
-      return new SalesTypeEntity({ id });
-    });
   }
 }

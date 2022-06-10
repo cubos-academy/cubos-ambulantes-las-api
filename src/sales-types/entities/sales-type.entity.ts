@@ -17,3 +17,11 @@ export class SalesTypeEntity {
     this.description = salesType?.description;
   }
 }
+
+export function idsToSalesTypesEntities(
+  salesTypes: Array<number>,
+): Array<SalesTypeEntity> {
+  return salesTypes.map((id: number) => {
+    return new SalesTypeEntity({ id });
+  });
+}
