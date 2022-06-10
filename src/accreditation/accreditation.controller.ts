@@ -16,6 +16,7 @@ import { throwDriverErrors } from 'src/utils/driver-errors/driver-errors.util';
 import { QueryFailedError } from 'typeorm';
 import { AccreditationService } from './accreditation.service';
 import { accreditationDecorators } from './doc/accreditation-controller.decorators';
+import { CreateAccreditationDto } from './dto/create-accreditation.dto';
 
 @ApiTags('accreditations')
 @Controller('accreditations')
@@ -24,16 +25,14 @@ export class AccreditationController {
 
   @UseGuards(AuthGuard())
   @accreditationDecorators.create()
-  @Post(':eventId')
-  async create(@Req() req, @Param('eventId') eventId: number) {
+  @Post()
+  async create(
+    @Req() req,
+    @Body() createAccredidationDto: CreateAccreditationDto,
+  ) {
     const userId: number = req.user.id;
 
-    return this.accreditationService
-      .create(userId, eventId)
-      .catch((err: QueryFailedError) => {
-        const errorCode = err.driverError.code;
-        throwDriverErrors(errorCode);
-      });
+    return this.accreditationService.create(userId, createAccredidationDto);
   }
 
   @UseGuards(AuthGuard())
