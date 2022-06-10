@@ -1,15 +1,23 @@
-import { IsIn, IsNumberString, IsString, Length } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { ArrayNotEmpty, IsArray, IsNumber } from 'class-validator';
 
 export class CreateAccreditationDto {
-  @IsString()
-  @Length(1, 250)
-  location: string;
+  @ApiProperty({
+    required: true,
+    description: 'The id of event that user want to accredit',
+    example: 1,
+    type: Number,
+  })
+  @IsNumber()
+  eventId: number;
 
-  @IsNumberString()
-  @IsIn([1, 2, 3])
-  salesType: number;
-
-  @IsNumberString()
-  @IsIn([1, 2, 3])
-  status: number;
+  @ApiProperty({
+    required: true,
+    description: 'Ids of sales types that user want to accredit',
+    example: [1, 2],
+    type: Array,
+  })
+  @IsArray()
+  @ArrayNotEmpty()
+  salesType: number[];
 }
