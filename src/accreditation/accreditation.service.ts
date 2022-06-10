@@ -77,13 +77,18 @@ export class AccreditationService {
       reload: true,
     });
     delete result.user;
+    delete result.event.allowedSalesTypes;
 
     return result;
   }
 
   async findAll(userId: number): Promise<AccreditationEntity[]> {
     const result = await this.userRepo.findOne(userId, {
-      relations: ['accreditations', 'accreditations.event'],
+      relations: [
+        'accreditations',
+        'accreditations.event',
+        'accreditations.salesTypes',
+      ],
     });
 
     return result.accreditations;
@@ -101,7 +106,7 @@ export class AccreditationService {
 
     return this.accreditationRepo.find({
       where: searchData,
-      relations: ['event'],
+      relations: ['event', 'salesTypes'],
     });
   }
 
