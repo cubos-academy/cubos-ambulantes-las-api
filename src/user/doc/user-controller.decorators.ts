@@ -4,7 +4,6 @@ import {
   ApiBearerAuth,
   ApiConflictResponse,
   ApiCreatedResponse,
-  ApiHeader,
   ApiInternalServerErrorResponse,
   ApiOkResponse,
   ApiOperation,
@@ -13,7 +12,7 @@ import {
 import { newUserSchemaExample, userSchemaExample } from './user-example.schema';
 
 export const userControllerSwaggerDecorators = {
-  post: () =>
+  create: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Creates a new user',
@@ -36,7 +35,7 @@ export const userControllerSwaggerDecorators = {
       }),
     ),
 
-  get: () =>
+  findOne: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Get user details',
@@ -57,14 +56,9 @@ export const userControllerSwaggerDecorators = {
         description: 'Unauthorized',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 
-  put: () =>
+  update: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Update user details',
@@ -88,10 +82,5 @@ export const userControllerSwaggerDecorators = {
         description: 'Bad request',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 };

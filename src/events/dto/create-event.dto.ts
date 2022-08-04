@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsDateString,
   IsIn,
   IsNumberString,
@@ -7,7 +8,7 @@ import {
   IsUrl,
   Length,
 } from 'class-validator';
-import { allowedStatus } from 'src/entities/event-entity';
+import { allowedStatus } from 'src/events/entities/event-entity';
 
 export class CreateEventDto {
   @IsString()
@@ -36,4 +37,7 @@ export class CreateEventDto {
   @Length(1, 255)
   @IsString()
   adminKey: string;
+
+  @IsArray()
+  allowedSalesTypes: Array<number>;
 }

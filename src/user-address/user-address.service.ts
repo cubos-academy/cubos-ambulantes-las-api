@@ -1,26 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserAddressEntity } from 'src/entities/user_address.entity';
 import { Repository } from 'typeorm';
 import { UpdateAddressDto } from './dto/update-user-address.dto';
+import { UserAddressEntity } from './entities/user_address.entity';
 
 @Injectable()
 export class UserAddressService {
   constructor(
     @InjectRepository(UserAddressEntity)
-    private readonly addressRepo: Repository<UserAddressEntity>,
+    private readonly addressRepository: Repository<UserAddressEntity>,
   ) {}
 
-  async findOne(id: number): Promise<UserAddressEntity> {
-    return this.addressRepo.findOne(id);
+  findOne(id: number): Promise<UserAddressEntity> {
+    return this.addressRepository.findOne(id);
   }
 
-  async update(
-    id: number,
-    updateAddressDto: UpdateAddressDto,
-  ): Promise<UserAddressEntity> {
-    updateAddressDto.id = id;
-    return this.addressRepo.save(updateAddressDto);
+  update(id: number, data: UpdateAddressDto): Promise<UserAddressEntity> {
+    data.id = id;
+    return this.addressRepository.save(data);
   }
 
   /**

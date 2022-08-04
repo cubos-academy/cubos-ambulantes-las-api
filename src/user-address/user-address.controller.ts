@@ -1,10 +1,10 @@
-import { Controller, Get, Body, Put, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Body, UseGuards, Req, Patch } from '@nestjs/common';
 import { UserAddressService } from './user-address.service';
 import { UpdateAddressDto } from './dto/update-user-address.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { QueryFailedError } from 'typeorm';
-import { throwDriverErrors } from 'src/utils/driver-errors.util';
+import { throwDriverErrors } from '../utils/driver-errors/driver-errors.util';
 import { userAddressControllerDecorators } from './doc/user-address-controller.decorators';
 
 @ApiTags('user')
@@ -13,10 +13,11 @@ export class UserAddressController {
   constructor(private readonly userAddressService: UserAddressService) {}
 
   @UseGuards(AuthGuard())
-  @userAddressControllerDecorators.get()
+  @userAddressControllerDecorators.findOne()
   @Get()
-  async findAll(@Req() req) {
+  async findOne(@Req() req) {
     const id: number = req.user.addressId;
+
     return this.userAddressService
       .findOne(id)
       .then((result) => {
@@ -28,11 +29,11 @@ export class UserAddressController {
       });
   }
 
-  @Put()
-  @userAddressControllerDecorators.put()
+  @Patch()
+  @userAddressControllerDecorators.update()
   @UseGuards(AuthGuard())
   async update(@Req() req, @Body() updateUserAddressDto: UpdateAddressDto) {
-    const id: number = req.user.id;
+    const id: number = req.user.addressId;
 
     return this.userAddressService
       .update(id, updateUserAddressDto)

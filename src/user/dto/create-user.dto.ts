@@ -10,8 +10,8 @@ import {
   IsUrl,
   Length,
 } from 'class-validator';
-import { UserAddressEntity } from 'src/entities/user_address.entity';
-import { UserContactsEntity } from 'src/entities/user_contacts.entity';
+import { UserAddressEntity } from '../../user-address/entities/user_address.entity';
+import { UserContactsEntity } from '../../user-contacts/entities/user_contacts.entity';
 
 export class CreateUserDto {
   @ApiProperty({

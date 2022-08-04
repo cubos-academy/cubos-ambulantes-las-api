@@ -6,6 +6,9 @@
         "user-address",
         "user-contacts",
         "events",
-        "accreditations"
+        "accreditations",
+        "token",
+        "user-password",
+        "sales-types"
     ]
 }

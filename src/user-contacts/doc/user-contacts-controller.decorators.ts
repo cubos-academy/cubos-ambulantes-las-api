@@ -3,7 +3,6 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiConflictResponse,
-  ApiHeader,
   ApiInternalServerErrorResponse,
   ApiOkResponse,
   ApiOperation,
@@ -12,7 +11,7 @@ import {
 import { userContactsExampleSchema } from './user-contacts-exampe.schema';
 
 export const userContactsControllerDecorators = {
-  get: () =>
+  findOne: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Get user contacts',
@@ -30,14 +29,9 @@ export const userContactsControllerDecorators = {
         description: 'Internal server error',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 
-  put: () =>
+  update: () =>
     applyDecorators(
       ApiOperation({
         summary: 'Updates user contacts',
@@ -60,10 +54,5 @@ export const userContactsControllerDecorators = {
         description: 'Bad Request',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 };

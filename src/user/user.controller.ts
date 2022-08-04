@@ -3,21 +3,18 @@ import {
   Get,
   Post,
   Body,
-  NotFoundException,
-  Put,
   UseGuards,
   Req,
-  InternalServerErrorException,
+  Patch,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { QueryFailedError } from 'typeorm';
-import { throwDriverErrors } from 'src/utils/driver-errors.util';
+import { throwDriverErrors } from '../utils/driver-errors/driver-errors.util';
 import { AuthGuard } from '@nestjs/passport';
 import { userControllerSwaggerDecorators } from './doc/user-controller.decorators';
-import { UserEntity } from 'src/entities/user.entity';
 
 @ApiTags('user')
 @Controller('user')
@@ -25,7 +22,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @userControllerSwaggerDecorators.post()
+  @userControllerSwaggerDecorators.create()
   async create(@Body() createUserDto: CreateUserDto) {
     return this.userService
       .create(createUserDto)
@@ -39,7 +36,7 @@ export class UserController {
   }
 
   @Get()
-  @userControllerSwaggerDecorators.get()
+  @userControllerSwaggerDecorators.findOne()
   @UseGuards(AuthGuard())
   async findOne(@Req() req) {
     const id: number = req.user.id;
@@ -55,9 +52,9 @@ export class UserController {
       });
   }
 
-  @Put()
+  @Patch()
   @UseGuards(AuthGuard())
-  @userControllerSwaggerDecorators.put()
+  @userControllerSwaggerDecorators.update()
   async update(@Req() req, @Body() updateUserDto: UpdateUserDto) {
     const id: number = req.user.id;
 

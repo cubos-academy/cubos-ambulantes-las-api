@@ -3,22 +3,22 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from 'src/entities/user.entity';
-import { PasswordHelper } from 'src/helpers/password-helper';
+import { UserEntity } from '../user/entities/user.entity';
+import { PasswordHelper } from '../helpers/password-helper';
 import { Repository } from 'typeorm';
 import { CredentialsDto } from './dto/credentials.dto';
+import { TokenService } from '../token/token.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private readonly jwtService: JwtService,
+    private readonly tokenService: TokenService,
   ) {}
 
-  async signIn(credentialsDto: CredentialsDto) {
+  public async signIn(credentialsDto: CredentialsDto) {
     const { cpf, password: receivedPassword } = credentialsDto;
     const user = await this.userRepository.findOne({ cpf });
 
@@ -33,11 +33,13 @@ export class AuthService {
     );
 
     if (isPasswordCorrect) {
-      const jwtPayload = {
+      const tokenPayload = {
         id: user.id,
       };
 
-      const token = this.jwtService.sign(jwtPayload);
+      const token = this.tokenService.sign(tokenPayload);
+      this.tokenService.save(token, user.id);
+
       return {
         message: 'Successfully created token',
         token,

@@ -1,7 +1,6 @@
 import { applyDecorators } from '@nestjs/common';
 import {
   ApiBearerAuth,
-  ApiHeader,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -9,11 +8,8 @@ import {
   ApiParam,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { eventStatus } from 'src/entities/event-entity';
-import {
-  eventExampleSchema,
-  eventsExampleSchema,
-} from './events-example.schema';
+import { eventStatus } from 'src/events/entities/event-entity';
+import { eventsExampleSchema } from './events-example.schema';
 
 export const eventsControllerDecorators = {
   findAll: () =>
@@ -36,11 +32,6 @@ export const eventsControllerDecorators = {
         description: 'Internal server error',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 
   findOne: () =>
@@ -53,7 +44,7 @@ export const eventsControllerDecorators = {
       ApiOkResponse({
         description: 'Successfully found item',
         schema: {
-          example: eventExampleSchema,
+          example: eventsExampleSchema[2],
           description: 'status: [1 = scheduled, 2 = inProgress, 3 = finished]',
         },
       }),
@@ -67,11 +58,6 @@ export const eventsControllerDecorators = {
         description: 'Internal server error',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 
   findByStatus: () =>
@@ -104,10 +90,5 @@ export const eventsControllerDecorators = {
         description: 'Internal server error',
       }),
       ApiBearerAuth(),
-      ApiHeader({
-        name: 'Authorization',
-        description: 'Bearer Token',
-        required: true,
-      }),
     ),
 };

@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { SalesTypeEntity } from 'src/sales-types/entities/sales-type.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'events' })
 export class EventEntity {
@@ -22,6 +29,10 @@ export class EventEntity {
 
   @Column({ type: 'smallint', nullable: false })
   status: number;
+
+  @ManyToMany(() => SalesTypeEntity, { onDelete: 'CASCADE' })
+  @JoinTable()
+  allowedSalesTypes: SalesTypeEntity[];
 }
 
 export enum eventStatus {
