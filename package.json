@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IvsonEmidio/cubos-ambulantes-las-api.git"
+    "url": "https://github.com/IvsonEmidio/api-las.git"
   },
   "scripts": {
     "prebuild": "rimraf dist",
